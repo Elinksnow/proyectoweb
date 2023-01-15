@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('centro_distribucions', function (Blueprint $table) {
+        Schema::create('egresos', function (Blueprint $table) {
             $table->id();
-            $table->string('cd_codigo');
-            $table->string('cd_direccion');
-            $table->string('cd_telefono');
+            $table->unsignedBigInteger('egre_farmacia_id');
+            $table->string('egre_fecha');
+            $table->string('egre_centro_dist');
             $table->timestamps();
+
+            $table->foreign('egre_farmacia_id')->references('id')->on('farmacias');
         });
     }
 
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('centro_distribucions');
+        Schema::dropIfExists('egresos');
     }
 };

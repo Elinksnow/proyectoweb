@@ -13,12 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('centro_distribucions', function (Blueprint $table) {
+        Schema::create('traspasos', function (Blueprint $table) {
             $table->id();
-            $table->string('cd_codigo');
-            $table->string('cd_direccion');
-            $table->string('cd_telefono');
+            $table->unsignedBigInteger('tras_cd_origen');
+            $table->unsignedBigInteger('tras_cd_destino');
+            $table->string('tras_estado');
             $table->timestamps();
+
+            $table->foreign('tras_cd_origen')->references('id')->on('centro_distribucions');
+            $table->foreign('tras_cd_destino')->references('id')->on('centro_distribucions');
         });
     }
 
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('centro_distribucions');
+        Schema::dropIfExists('traspasos');
     }
 };
