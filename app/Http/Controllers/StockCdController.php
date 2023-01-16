@@ -7,79 +7,64 @@ use Illuminate\Http\Request;
 
 class StockCdController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $stockcds = StockCd::all();
+        return response()->json($stockcds, status:201);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
-        //
+        return response()->json(status:201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    
+    public function store(StockCdRequest $request)
     {
-        //
+        $stockcd = new StockCd();
+        $stockcd->scd_id_medicamento = $request->input('scd_id_medicamento');
+        $stockcd->scd_centro_distribucion = $request->input('scd_centro_distribucion');
+        $stockcd->scd_cantidad = $request->input('scd_cantidad');
+        $stockcd->scd_lote = $request->input('scd_lote');
+        $stockcd->save();
+
+        return response()->json($stockcd, status:201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\stock_cd  $stock_cd
-     * @return \Illuminate\Http\Response
-     */
-    public function show(stock_cd $stock_cd)
+    
+    public function show($id)
     {
-        //
+        $stockcd = StockCd::findOrFail($id);
+        return response()->json($stockcd, status:201);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\stock_cd  $stock_cd
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(stock_cd $stock_cd)
+    
+    public function edit($id)
     {
-        //
+        $stockcd = StockCd::findOrFail($id);
+        return response()->json($stockcd, status:201);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\stock_cd  $stock_cd
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, stock_cd $stock_cd)
+    
+    public function update(StockCdRequest $request, $id)
     {
-        //
+        $stockcd = StockCd::findOrFail($id);
+        $stockcd->scd_id_medicamento = $request->input('scd_id_medicamento');
+        $stockcd->scd_centro_distribucion = $request->input('scd_centro_distribucion');
+        $stockcd->scd_cantidad = $request->input('scd_cantidad');
+        $stockcd->scd_lote = $request->input('scd_lote');
+        $stockcd->save();
+
+        return response()->json($stockcd, status:201);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\stock_cd  $stock_cd
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(stock_cd $stock_cd)
+    
+    public function destroy($id)
     {
-        //
+        $stockcd = StockCd::findOrFail($id);
+        $stockcd->delete();
+
+        return response()->json($stockcd, status:201);
     }
 }

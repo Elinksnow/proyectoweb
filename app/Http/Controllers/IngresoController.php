@@ -7,79 +7,60 @@ use Illuminate\Http\Request;
 
 class IngresoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $ingresos = Ingreso::all();
+        return response()->json($ingresos, status:201);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
-        //
+        return response()->json(status:201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    
+    public function store(IngresoRequest $request)
     {
-        //
+        $ingreso = new Ingreso();
+        $ingreso->ingr_centro_dist = $request->input('ingr_centro_dist');
+        $ingreso->ingr_fecha = $request->input('ingr_fecha');
+        $ingreso->save();
+
+        return response()->json($ingreso, status:201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ingreso  $ingreso
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ingreso $ingreso)
+    
+    public function show($id)
     {
-        //
+        $ingreso = Ingreso::findOrFail($id);
+        return response()->json($ingreso, status:201);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ingreso  $ingreso
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ingreso $ingreso)
+    
+    public function edit($id)
     {
-        //
+        $ingreso = Ingreso::findOrFail($id);
+        return response()->json($ingreso, status:201);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ingreso  $ingreso
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ingreso $ingreso)
+    
+    public function update(IngresoRequest $request, $id)
     {
-        //
+        $ingreso = Ingreso::findOrFail($id);
+        $ingreso->ingr_centro_dist = $request->input('ingr_centro_dist');
+        $ingreso->ingr_fecha = $request->input('ingr_fecha');
+        $ingreso->save();
+
+        return response()->json($ingreso, status:201);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ingreso  $ingreso
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ingreso $ingreso)
+    
+    public function destroy($id)
     {
-        //
+        $ingreso = Ingreso::findOrFail($id);
+        $ingreso->delete();
+
+        return response()->json($ingreso, status:201);
     }
 }

@@ -7,79 +7,60 @@ use Illuminate\Http\Request;
 
 class DetalleIngresoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $detalle_ingresos = DetalleIngreso::all();
+        return response()->json($detalle_ingresos, status:201);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
-        //
+        return response()->json(status:201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    
+    public function store(Detalle_ingresoRequest $request)
     {
-        //
+        $detalle_ingreso = new Detalle_ingreso();
+        $detalle_ingreso->det_egre_cantidad = $request->input('det_egre_cantidad');
+        $detalle_ingreso->det_egre_lote = $request->input('det_egre_lote');
+        $detalle_ingreso->save();
+
+        return response()->json($detalle_ingreso, status:201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\detalle_ingreso  $detalle_ingreso
-     * @return \Illuminate\Http\Response
-     */
-    public function show(detalle_ingreso $detalle_ingreso)
+    
+    public function show($id)
     {
-        //
+        $detalle_ingreso = Detalle_ingreso::findOrFail($id);
+        return response()->json($detalle_ingreso, status:201);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\detalle_ingreso  $detalle_ingreso
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(detalle_ingreso $detalle_ingreso)
+    
+    public function edit($id)
     {
-        //
+        $detalle_ingreso = Detalle_ingreso::findOrFail($id);
+        return response()->json($detalle_ingreso, status:201);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\detalle_ingreso  $detalle_ingreso
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, detalle_ingreso $detalle_ingreso)
+    
+    public function update(Detalle_ingresoRequest $request, $id)
     {
-        //
+        $detalle_ingreso = Detalle_ingreso::findOrFail($id);
+        $detalle_ingreso->cd_codigo = $request->input('det_egre_cantidad');
+        $detalle_ingreso->cd_direccion = $request->input('det_egre_lote');
+        $detalle_ingreso->save();
+
+        return response()->json($detalle_ingreso, status:201);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\detalle_ingreso  $detalle_ingreso
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(detalle_ingreso $detalle_ingreso)
+    
+    public function destroy($id)
     {
-        //
+        $detalle_ingreso = Detalle_ingreso::findOrFail($id);
+        $detalle_ingreso->delete();
+
+        return response()->json($detalle_ingreso, status:201);
     }
 }

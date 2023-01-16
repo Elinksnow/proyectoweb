@@ -25,8 +25,8 @@ class DetalleEgresoController extends Controller
     public function store(Detalle_egresoRequest $request)
     {
         $detalle_egreso = new Detalle_egreso();
-        $detalle_egreso->cd_codigo = $request->input('det_egre_cantidad');
-        $detalle_egreso->cd_direccion = $request->input('det_egre_lote');
+        $detalle_egreso->det_egre_cantidad = $request->input('det_egre_cantidad');
+        $detalle_egreso->det_egre_lote = $request->input('det_egre_lote');
         $detalle_egreso->save();
 
         return response()->json($detalle_egreso, status:201);
@@ -50,8 +50,8 @@ class DetalleEgresoController extends Controller
     public function update(Detalle_egresoRequest $request, $id)
     {
         $detalle_egreso = Detalle_egreso::findOrFail($id);
-        $detalle_egreso->cd_codigo = $request->input('det_egre_cantidad');
-        $detalle_egreso->cd_direccion = $request->input('det_egre_lote');
+        $detalle_egreso->det_egre_cantidad = $request->input('det_egre_cantidad');
+        $detalle_egreso->det_egre_lote = $request->input('det_egre_lote');
         $detalle_egreso->save();
 
         return response()->json($detalle_egreso, status:201);

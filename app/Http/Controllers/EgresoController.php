@@ -7,79 +7,60 @@ use Illuminate\Http\Request;
 
 class EgresoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $egresos = Egreso::all();
+        return response()->json($egresos, status:201);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
-        //
+        return response()->json(status:201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    
+    public function store(egresoRequest $request)
     {
-        //
+        $egreso = new Egreso();
+        $egreso->egre_fecha = $request->input('egre_fecha');
+        $egreso->egre_centro_dist = $request->input('egre_centro_dist');
+        $egreso->save();
+
+        return response()->json($egreso, status:201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\egreso  $egreso
-     * @return \Illuminate\Http\Response
-     */
-    public function show(egreso $egreso)
+    
+    public function show($id)
     {
-        //
+        $egreso = egreso::findOrFail($id);
+        return response()->json($egreso, status:201);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\egreso  $egreso
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(egreso $egreso)
+    
+    public function edit($id)
     {
-        //
+        $egreso = egreso::findOrFail($id);
+        return response()->json($egreso, status:201);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\egreso  $egreso
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, egreso $egreso)
+    
+    public function update(egresoRequest $request, $id)
     {
-        //
+        $egreso = egreso::findOrFail($id);
+        $egreso->egre_fecha = $request->input('egre_fecha');
+        $egreso->egre_centro_dist = $request->input('egre_centro_dist');
+        $egreso->save();
+
+        return response()->json($egreso, status:201);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\egreso  $egreso
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(egreso $egreso)
+    
+    public function destroy($id)
     {
-        //
+        $egreso = egreso::findOrFail($id);
+        $egreso->delete();
+
+        return response()->json($egreso, status:201);
     }
 }

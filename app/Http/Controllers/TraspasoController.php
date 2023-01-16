@@ -7,79 +7,63 @@ use Illuminate\Http\Request;
 
 class TraspasoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $traspasos = Traspaso::all();
+        return response()->json($traspasos, status:201);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
-        //
+        return response()->json(status:201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    
+    public function store(TraspasoRequest $request)
     {
-        //
+        $traspaso = new Traspaso();
+        $traspaso->tras_cd_origen = $request->input('tras_cd_origen');
+        $traspaso->tras_cd_destino = $request->input('tras_cd_destino');
+        $traspaso->tras_estado = $request->input('tras_estado');
+
+        $traspaso->save();
+
+        return response()->json($traspaso, status:201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\traspaso  $traspaso
-     * @return \Illuminate\Http\Response
-     */
-    public function show(traspaso $traspaso)
+    
+    public function show($id)
     {
-        //
+        $traspaso = Traspaso::findOrFail($id);
+        return response()->json($traspaso, status:201);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\traspaso  $traspaso
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(traspaso $traspaso)
+    
+    public function edit($id)
     {
-        //
+        $traspaso = Traspaso::findOrFail($id);
+        return response()->json($traspaso, status:201);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\traspaso  $traspaso
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, traspaso $traspaso)
+    
+    public function update(TraspasoRequest $request, $id)
     {
-        //
+        $traspaso = Traspaso::findOrFail($id);
+        $traspaso->tras_cd_origen = $request->input('tras_cd_origen');
+        $traspaso->tras_cd_destino = $request->input('tras_cd_destino');
+        $traspaso->tras_estado = $request->input('tras_estado');
+        $traspaso->save();
+
+        return response()->json($traspaso, status:201);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\traspaso  $traspaso
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(traspaso $traspaso)
+    
+    public function destroy($id)
     {
-        //
+        $traspaso = Traspaso::findOrFail($id);
+        $traspaso->delete();
+
+        return response()->json($traspaso, status:201);
     }
 }

@@ -7,79 +7,62 @@ use Illuminate\Http\Request;
 
 class FarmaciaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $farmacias = Farmacia::all();
+        return response()->json($farmacias, status:201);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
-        //
+        return response()->json(status:201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    
+    public function store(FarmaciaRequest $request)
     {
-        //
+        $farmacia = new Farmacia();
+        $farmacia->farm_nombre = $request->input('farm_nombre');
+        $farmacia->farm_direccion = $request->input('farm_direccion');
+        $farmacia->farm_mail = $request->input('farm_mail');
+        $farmacia->save();
+
+        return response()->json($farmacia, status:201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\farmacia  $farmacia
-     * @return \Illuminate\Http\Response
-     */
-    public function show(farmacia $farmacia)
+    
+    public function show($id)
     {
-        //
+        $farmacia = Farmacia::findOrFail($id);
+        return response()->json($farmacia, status:201);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\farmacia  $farmacia
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(farmacia $farmacia)
+    
+    public function edit($id)
     {
-        //
+        $farmacia = Farmacia::findOrFail($id);
+        return response()->json($farmacia, status:201);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\farmacia  $farmacia
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, farmacia $farmacia)
+    
+    public function update(FarmaciaRequest $request, $id)
     {
-        //
+        $farmacia = Farmacia::findOrFail($id);
+        $farmacia->farm_nombre = $request->input('farm_nombre');
+        $farmacia->farm_direccion = $request->input('farm_direccion');
+        $farmacia->farm_mail = $request->input('farm_mail');
+        $farmacia->save();
+
+        return response()->json($farmacia, status:201);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\farmacia  $farmacia
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(farmacia $farmacia)
+    
+    public function destroy($id)
     {
-        //
+        $farmacia = Farmacia::findOrFail($id);
+        $farmacia->delete();
+
+        return response()->json($farmacia, status:201);
     }
 }
