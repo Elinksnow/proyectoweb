@@ -3,83 +3,67 @@
 namespace App\Http\Controllers;
 
 use App\Models\centro_distribucion;
-use Illuminate\Http\Request;
+use App\Http\Requests\centro_distribucionRequest;
 
 class CentroDistribucionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
-        //
+        $centro_distribucions = Centro_distribucion::all();
+        return response()->json($centro_distribucions, status:201);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
-        //
+        return response()->json(status:201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    
+    public function store(Centro_distribucionRequest $request)
     {
-        //
+        $centro_distribucion = new Centro_distribucion();
+        $centro_distribucion->cd_codigo = $request->input('cd_codigo');
+        $centro_distribucion->cd_direccion = $request->input('cd_direccion');
+        $centro_distribucion->cd_telefono = $request->input('cd_telefono');
+        $centro_distribucion->save();
+
+        return response()->json($centro_distribucion, status:201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\centro_distribucion  $centro_distribucion
-     * @return \Illuminate\Http\Response
-     */
-    public function show(centro_distribucion $centro_distribucion)
+    
+    public function show($id)
     {
-        //
+        $centro_distribucion = Centro_distribucion::findOrFail($id);
+        return response()->json($centro_distribucion, status:201);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\centro_distribucion  $centro_distribucion
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(centro_distribucion $centro_distribucion)
+    
+    public function edit($id)
     {
-        //
+        $centro_distribucion = Centro_distribucion::findOrFail($id);
+        return response()->json($centro_distribucion, status:201);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\centro_distribucion  $centro_distribucion
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, centro_distribucion $centro_distribucion)
+    
+    public function update(Centro_distribucionRequest $request, $id)
     {
-        //
+        $centro_distribucion = Centro_distribucion::findOrFail($id);
+        $centro_distribucion->cd_codigo = $request->input('cd_codigo');
+        $centro_distribucion->cd_direccion = $request->input('cd_direccion');
+        $centro_distribucion->cd_telefono = $request->input('cd_telefono');
+        $centro_distribucion->save();
+
+        return response()->json($centro_distribucion, status:201);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\centro_distribucion  $centro_distribucion
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(centro_distribucion $centro_distribucion)
+    
+    public function destroy($id)
     {
-        //
+        $centro_distribucion = Centro_distribucion::findOrFail($id);
+        $centro_distribucion->delete();
+
+        return response()->json($centro_distribucion, status:201);
     }
 }

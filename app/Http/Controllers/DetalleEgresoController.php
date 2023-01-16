@@ -3,83 +3,67 @@
 namespace App\Http\Controllers;
 
 use App\Models\detalle_egreso;
-use Illuminate\Http\Request;
+
+use App\Http\Requests\Detalle_egresoRequest;
 
 class DetalleEgresoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
-        //
+        $detalle_egresos = Detalle_egreso::all();
+        return response()->json($detalle_egresos, status:201);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
-        //
+        return response()->json(status:201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    
+    public function store(Detalle_egresoRequest $request)
     {
-        //
+        $detalle_egreso = new Detalle_egreso();
+        $detalle_egreso->cd_codigo = $request->input('det_egre_cantidad');
+        $detalle_egreso->cd_direccion = $request->input('det_egre_lote');
+        $detalle_egreso->save();
+
+        return response()->json($detalle_egreso, status:201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\detalle_egreso  $detalle_egreso
-     * @return \Illuminate\Http\Response
-     */
-    public function show(detalle_egreso $detalle_egreso)
+    
+    public function show($id)
     {
-        //
+        $detalle_egreso = Detalle_egreso::findOrFail($id);
+        return response()->json($detalle_egreso, status:201);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\detalle_egreso  $detalle_egreso
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(detalle_egreso $detalle_egreso)
+    
+    public function edit($id)
     {
-        //
+        $detalle_egreso = Detalle_egreso::findOrFail($id);
+        return response()->json($detalle_egreso, status:201);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\detalle_egreso  $detalle_egreso
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, detalle_egreso $detalle_egreso)
+    
+    public function update(Detalle_egresoRequest $request, $id)
     {
-        //
+        $detalle_egreso = Detalle_egreso::findOrFail($id);
+        $detalle_egreso->cd_codigo = $request->input('cd_codigo');
+        $detalle_egreso->cd_direccion = $request->input('cd_direccion');
+        $detalle_egreso->cd_telefono = $request->input('cd_telefono');
+        $detalle_egreso->save();
+
+        return response()->json($detalle_egreso, status:201);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\detalle_egreso  $detalle_egreso
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(detalle_egreso $detalle_egreso)
+    
+    public function destroy($id)
     {
-        //
+        $detalle_egreso = Detalle_egreso::findOrFail($id);
+        $detalle_egreso->delete();
+
+        return response()->json($detalle_egreso, status:201);
     }
 }

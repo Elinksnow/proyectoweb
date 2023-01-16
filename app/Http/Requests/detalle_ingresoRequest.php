@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Response;
 
-class centro_distribucionRequest extends FormRequest
+class detalle_ingresoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,7 @@ class centro_distribucionRequest extends FormRequest
     public function rules()
     {
         return [
-            "det_ing_cantidad" => "required|max:150",
+            "det_ing_cantidad" => "required|max:999999",
             "det_ing_lote" => "required|string"
         ];
     }
