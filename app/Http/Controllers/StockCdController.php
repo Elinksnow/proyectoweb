@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\stock_cd;
 use Illuminate\Http\Request;
+use App\Http\Requests\stock_cdRequest;
 
 class StockCdController extends Controller
 {

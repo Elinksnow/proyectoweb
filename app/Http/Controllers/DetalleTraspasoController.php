@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\detalle_traspaso;
 use Illuminate\Http\Request;
+use App\Http\Requests\detalle_traspasoRequest;
 
 class DetalleTraspasoController extends Controller
 {

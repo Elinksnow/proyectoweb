@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\egreso;
 use Illuminate\Http\Request;
+use App\Http\Requests\egresoRequest;
 
 class EgresoController extends Controller
 {

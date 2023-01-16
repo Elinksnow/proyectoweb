@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ingreso;
 use Illuminate\Http\Request;
+use App\Http\Requests\ingresoRequest;
 
 class IngresoController extends Controller
 {

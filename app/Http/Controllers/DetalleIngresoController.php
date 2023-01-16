@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\detalle_ingreso;
 use Illuminate\Http\Request;
+use App\Http\Requests\detalle_ingresoRequest;
 
 class DetalleIngresoController extends Controller
 {

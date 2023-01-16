@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\farmacia;
 use Illuminate\Http\Request;
+use App\Http\Requests\farmaciaRequest;
 
 class FarmaciaController extends Controller
 {
