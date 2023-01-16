@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('det_traspaso_id');
             $table->unsignedBigInteger('id_medicamento');
-            $table->string('det_tra_cantidad');
+            $table->integer('det_tra_cantidad');
             $table->string('det_tra_lote');
             $table->timestamps();
 

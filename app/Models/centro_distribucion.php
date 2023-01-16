@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class centro_distribucion extends Model
 {
     use HasFactory;
+    protected $fillable = ['cd_codigo','cd_direccion','cd_telefono'];
+
 }
