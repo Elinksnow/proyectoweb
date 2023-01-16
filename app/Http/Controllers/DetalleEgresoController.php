@@ -50,9 +50,8 @@ class DetalleEgresoController extends Controller
     public function update(Detalle_egresoRequest $request, $id)
     {
         $detalle_egreso = Detalle_egreso::findOrFail($id);
-        $detalle_egreso->cd_codigo = $request->input('cd_codigo');
-        $detalle_egreso->cd_direccion = $request->input('cd_direccion');
-        $detalle_egreso->cd_telefono = $request->input('cd_telefono');
+        $detalle_egreso->cd_codigo = $request->input('det_egre_cantidad');
+        $detalle_egreso->cd_direccion = $request->input('det_egre_lote');
         $detalle_egreso->save();
 
         return response()->json($detalle_egreso, status:201);
