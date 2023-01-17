@@ -24,9 +24,6 @@ use App\Http\Controllers\TraspasoController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::resource('centro_distribucion',CentroDistribucionController::class);
 Route::resource('farmacia',FarmaciaController::class);

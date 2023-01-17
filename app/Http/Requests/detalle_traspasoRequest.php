@@ -16,7 +16,7 @@ class detalle_traspasoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
