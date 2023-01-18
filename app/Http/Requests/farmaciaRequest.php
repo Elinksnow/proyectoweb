@@ -26,7 +26,7 @@ class farmaciaRequest extends FormRequest
         return [
             "farm_nombre" => "required|string",
             "farm_direccion" => "required|string",
-            "farm_mail" => "required|email"
+            "farm_mail" => "required|email:rtc,dns|unique"
         ];
     }
 
